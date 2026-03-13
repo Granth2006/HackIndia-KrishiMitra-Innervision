@@ -1,0 +1,22 @@
+{
+  "name": "KrishiMitra AI",
+  "short_name": "KrishiMitra",
+  "description": "AI-Powered Smart Farming Platform for Indian Farmers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#00A676",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/krishimitra.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/krishimitra.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

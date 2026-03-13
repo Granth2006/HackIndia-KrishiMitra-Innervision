@@ -1,0 +1,738 @@
+/* ─── Your Field Page ─── */
+.your-field-page {
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.your-field-page h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.your-field-page .page-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+/* ─── Welcome / Empty State ─── */
+.field-welcome {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.field-welcome .welcome-icon {
+  font-size: 4rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.field-welcome h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.field-welcome p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  border-radius: 14px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover, var(--primary));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-danger:hover {
+  background: rgba(220, 53, 69, 0.2);
+}
+
+/* ─── Mode Selection ─── */
+.mode-selection {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.mode-selection h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.mode-selection > p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.mode-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+
+.mode-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.mode-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.mode-card .mode-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.mode-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.mode-card p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.mode-back-btn {
+  margin-top: 1rem;
+}
+
+/* ─── Manual Mode ─── */
+.manual-mode,
+.auto-mode {
+  padding: 1rem 0;
+}
+
+.manual-mode h2,
+.auto-mode h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.manual-mode > p,
+.auto-mode > p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.field-name-input {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.field-name-input label {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.field-name-input input {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.field-name-input input:focus {
+  border-color: var(--primary);
+}
+
+.manual-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.manual-controls .point-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  background: var(--primary-alpha, rgba(76, 175, 80, 0.1));
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.coordinate-list {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.coordinate-list h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.coord-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: var(--hover-bg, rgba(0, 0, 0, 0.03));
+}
+
+.coord-item .coord-index {
+  font-weight: 700;
+  color: var(--primary);
+  min-width: 24px;
+}
+
+.coord-item .coord-values {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.coord-item .coord-remove {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.coord-item .coord-remove:hover {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+/* ─── Map Container ─── */
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.map-container .leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.map-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* ─── Saved Fields List ─── */
+.fields-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.fields-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.field-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.field-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.field-card-map {
+  width: 100%;
+  height: 180px;
+}
+
+.field-card-map .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.field-card-info {
+  padding: 1.25rem;
+}
+
+.field-card-info h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.field-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.field-card-meta span {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.field-card-meta span i {
+  font-size: 0.78rem;
+  color: var(--primary);
+}
+
+.field-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ─── Saving Spinner ─── */
+.saving-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.saving-overlay i {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+/* ─── Location Status ─── */
+.location-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.location-status.success {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.location-status.error {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.location-status.loading {
+  background: var(--primary-alpha, rgba(76, 175, 80, 0.1));
+  color: var(--primary);
+}
+
+/* ─── Location Search Bar (Satellite Mode) ─── */
+.location-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+.location-search-bar:focus-within {
+  border-color: var(--primary);
+}
+
+.location-search-bar > i {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.location-search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  padding: 0.35rem 0;
+  min-width: 0;
+}
+
+.location-search-bar input::placeholder {
+  color: var(--text-muted);
+}
+
+.location-search-bar button {
+  padding: 0.4rem 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+  flex-shrink: 0;
+}
+
+.location-search-bar button:hover:not(:disabled) {
+  background: var(--primary-dark, #00916a);
+  transform: translateY(-1px);
+}
+
+.location-search-bar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── Auto Mode Instruction Banner ─── */
+.auto-instructions {
+  background: var(--primary-alpha, rgba(76, 175, 80, 0.08));
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.auto-instructions i {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-top: 0.1rem;
+}
+
+/* ─── Field Detail View ─── */
+.field-detail-view {
+  padding: 0.5rem 0;
+}
+
+.field-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.field-detail-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.field-detail-map {
+  height: 500px !important;
+  border-radius: 18px;
+  margin-bottom: 1.5rem;
+}
+
+.field-detail-info {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.field-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.field-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: var(--hover-bg, rgba(0, 0, 0, 0.03));
+}
+
+.field-stat > i {
+  font-size: 1.3rem;
+  color: var(--primary);
+  width: 28px;
+  text-align: center;
+}
+
+.field-stat div {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+
+.field-stat-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ─── Sprinkler Legend ─── */
+.sprinkler-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.sprinkler-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+}
+
+.legend-dot--field {
+  background: rgba(76, 175, 80, 0.3);
+  border-color: #4caf50;
+}
+
+.legend-dot--sprinkler {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: #2196F3;
+}
+
+.legend-dot--grid {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  border-style: dashed;
+}
+
+/* ─── Edit Field Section ─── */
+.edit-field-section {
+  padding: 1rem 0;
+}
+
+.edit-boundary-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.edit-boundary-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.edit-boundary-hint i {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .your-field-page {
+    padding: 1.25rem 1rem;
+  }
+
+  .mode-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .field-detail-map {
+    height: 350px !important;
+  }
+
+  .field-detail-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .field-welcome {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .manual-controls {
+    flex-direction: column;
+  }
+
+  .map-actions {
+    flex-direction: column;
+  }
+
+  .map-actions .btn-primary,
+  .map-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sprinkler-legend {
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .edit-boundary-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

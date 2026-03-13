@@ -1,0 +1,169 @@
+/* ====== KrishiMitra AI v2 - Global Design System ====== */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* CSS Variables - Light */
+:root {
+  --primary: #00a676;
+  --primary-dark: #008a62;
+  --primary-alpha: rgba(0, 166, 118, 0.12);
+
+  --bg: #f7f8fa;
+  --bg-alt: #f0f2f5;
+  --card-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.85);
+
+  --text-primary: #1a1d23;
+  --text-secondary: #4a5568;
+  --text-muted: #94a3b8;
+
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --hover-bg: rgba(0, 166, 118, 0.06);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+
+  --radius: 16px;
+}
+
+/* Dark Mode */
+body.dark {
+  --bg: #0f1117;
+  --bg-alt: #161822;
+  --card-bg: #1c1f2e;
+  --sidebar-bg: #141622;
+  --header-bg: rgba(15, 17, 23, 0.88);
+
+  --text-primary: #e8ecf4;
+  --text-secondary: #9ca3b8;
+  --text-muted: #5a6178;
+
+  --border: #2a2d3e;
+  --border-light: #1e2130;
+  --hover-bg: rgba(0, 166, 118, 0.1);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family:
+    "Poppins",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  flex: 1;
+  margin-left: 260px;
+  min-height: 100vh;
+  padding-bottom: 1rem;
+  transition: margin-left 0.3s;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-content {
+    margin-left: 0;
+    padding-bottom: 5.5rem;
+  }
+}
+
+/* Loading */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+/* Landing resets */
+.landing {
+  min-height: 100vh;
+}
+
+/* Utility */
+.hidden-input {
+  display: none;
+}
+
+/* Selection */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,474 @@
+.profile-card {
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.profile-avatar {
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary-alpha);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.profile-info h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.profile-location {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.profile-location i {
+  color: var(--primary);
+}
+
+.profile-edit {
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.profile-edit .form-group {
+  margin-bottom: 0.75rem;
+}
+
+.profile-edit label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+  display: block;
+}
+
+.profile-edit input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.profile-edit input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+.profile-edit input:disabled {
+  opacity: 0.5;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.settings-card {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.settings-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.setting-item strong {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.setting-item p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 26px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--primary);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+
+.logout-btn-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: none;
+  border: 1.5px solid #dc3545;
+  color: #dc3545;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.logout-btn-full:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Profile bottom actions */
+.profile-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.home-btn-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: none;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.home-btn-full:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ─── Premium Wallet Card (Your Data Access) ─── */
+.wallet-premium-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.wallet-premium-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #00a676 50%, transparent 100%);
+}
+
+.wallet-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 1rem;
+}
+
+.wallet-card-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e8ecf4;
+}
+
+.wallet-card-header h3 i {
+  color: #00a676;
+  filter: drop-shadow(0 0 8px rgba(0, 166, 118, 0.4));
+}
+
+.blockchain-secured-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a0aec0;
+  background: rgba(160, 174, 192, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(160, 174, 192, 0.2);
+}
+
+.blockchain-secured-badge i {
+  color: #00a676;
+}
+
+.blockchain-wallet-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.wallet-address-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wallet-address-row .wallet-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wallet-address {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  color: #e8ecf4;
+  word-break: break-all;
+  background: rgba(15, 17, 23, 0.6);
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wallet-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.wallet-stat-box {
+  background: rgba(15, 17, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.wallet-stat-box:hover {
+  transform: translateY(-2px);
+  background: rgba(15, 17, 23, 0.8);
+  border-color: rgba(0, 166, 118, 0.3);
+}
+
+.wallet-stat-box .wallet-label {
+  font-size: 0.8rem;
+  color: #a0aec0;
+  font-weight: 500;
+}
+
+.wallet-stat-box .wallet-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e8ecf4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-dashboard-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 166, 118, 0.1) 0%, rgba(0, 200, 150, 0.05) 100%);
+  border: 1px solid rgba(0, 166, 118, 0.3);
+  color: #00c896;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.wallet-dashboard-link:hover {
+  background: linear-gradient(135deg, #00A676 0%, #00c896 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 166, 118, 0.25);
+}
+
+/* ─── Push Notification Card ─── */
+
+.notification-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notification-card h3 i {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.notif-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.notif-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, #00A676 0%, #00c896 100%);
+  border: none;
+  color: white;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 4px 15px rgba(0, 166, 118, 0.3);
+}
+
+.notif-send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 166, 118, 0.4);
+}
+
+.notif-send-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.notif-send-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.notif-feedback {
+  margin-top: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.notif-success {
+  background: rgba(0, 166, 118, 0.12);
+  color: #00A676;
+  border: 1px solid rgba(0, 166, 118, 0.25);
+}
+
+.notif-error {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.notif-unsupported {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  border-radius: 10px;
+  color: #ffc107;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.notification-card{
+  display:none;
+}

@@ -1,0 +1,515 @@
+/* ─── Floating Language Button (Landing) ─── */
+.lang-floating {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.lang-floating-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background: linear-gradient(135deg, var(--primary), #00d68f);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0, 166, 118, 0.35);
+  transition: all 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+
+.lang-floating-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 32px rgba(0, 166, 118, 0.45);
+}
+
+.lang-floating-btn i {
+  font-size: 1.15rem;
+}
+
+.lang-floating-btn-label {
+  font-size: 0.82rem;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Floating menu popup */
+.lang-floating-menu {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  right: 0;
+  width: 280px;
+  max-height: 420px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: langMenuIn 0.25s ease;
+}
+
+@keyframes langMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lang-floating-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.lang-floating-menu-header i {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.lang-floating-menu-list {
+  overflow-y: auto;
+  padding: 0.5rem;
+  flex: 1;
+}
+
+.lang-floating-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+}
+
+.lang-floating-item:hover {
+  background: var(--primary-alpha);
+}
+
+.lang-floating-item.active {
+  background: var(--primary-alpha);
+  border: 1px solid var(--primary);
+}
+
+.lang-floating-item .lang-native {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.lang-floating-item .lang-english {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.lang-floating-item i {
+  color: var(--primary);
+  font-size: 0.85rem;
+}
+/* ─── Inline Language Selector (Profile) ─── */
+.lang-inline {
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  margin-bottom: 1rem;
+}
+
+.lang-inline h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-inline h3 i {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.lang-inline-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.lang-inline-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.lang-inline-search:focus-within {
+  border-color: var(--primary);
+}
+
+.lang-inline-search i {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.lang-inline-search input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+.lang-inline-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.lang-inline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.lang-inline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.75rem 0.5rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+.lang-inline-item:hover {
+  border-color: var(--primary);
+  background: var(--primary-alpha);
+  transform: translateY(-2px);
+}
+
+.lang-inline-item.active {
+  border-color: var(--primary);
+  background: var(--primary-alpha);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.lang-inline-item .lang-native {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.lang-inline-item .lang-english {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.lang-inline-item i {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  color: var(--primary);
+  font-size: 0.75rem;
+}
+
+/* ─── Header Language Button (Landing Header) ─── */
+.lang-header {
+  position: relative;
+}
+
+.lang-header-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--primary-alpha, rgba(0, 166, 118, 0.1));
+  color: var(--text-primary);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+  white-space: nowrap;
+}
+
+.lang-header-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-alpha, rgba(0, 166, 118, 0.15));
+}
+
+.lang-header-btn i:first-child {
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.lang-header-arrow {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.lang-header-label {
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.lang-header-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  width: 280px;
+  max-height: 400px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: langMenuIn 0.25s ease;
+  z-index: 1000;
+}
+
+.lang-header-menu-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.lang-header-menu-title i {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.lang-header-menu-list {
+  overflow-y: auto;
+  padding: 0.4rem;
+  flex: 1;
+}
+
+.lang-header-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+}
+
+.lang-header-item:hover {
+  background: var(--primary-alpha);
+}
+
+.lang-header-item.active {
+  background: var(--primary-alpha);
+  border: 1px solid var(--primary);
+}
+
+.lang-header-item .lang-native {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.lang-header-item .lang-english {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.lang-header-item i {
+  color: var(--primary);
+  font-size: 0.8rem;
+}
+
+/* ─── Dashboard Floating Language Button (top-right) ─── */
+.lang-dashboard-float {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.lang-dashboard-float-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s;
+  font-family: "Poppins", sans-serif;
+}
+
+.lang-dashboard-float-btn:hover {
+  border-color: var(--primary);
+  box-shadow: 0 6px 24px rgba(0, 166, 118, 0.2);
+  transform: translateY(-2px);
+}
+
+.lang-dashboard-float-btn i {
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.lang-dashboard-float-label {
+  font-size: 0.78rem;
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lang-dashboard-float-menu {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  right: 0;
+  width: 280px;
+  max-height: 420px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: langMenuIn 0.25s ease;
+}
+
+/* ─── Hide Google Translate bar ─── */
+.goog-te-banner-frame,
+.skiptranslate,
+#google_translate_element {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .lang-floating {
+    bottom: 5rem;
+    right: 1rem;
+  }
+
+  .lang-floating-menu {
+    width: 260px;
+    max-height: 360px;
+  }
+
+  .lang-floating-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .lang-inline-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .lang-header-btn {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  .lang-header-label {
+    display: none;
+  }
+
+  .lang-header-arrow {
+    display: none;
+  }
+
+  .lang-header-menu {
+    width: 260px;
+    right: -1rem;
+  }
+
+  .lang-dashboard-float {
+    top: 0.75rem;
+    right: 1rem;
+  }
+
+  .lang-dashboard-float-btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .lang-dashboard-float-label {
+    display: none;
+  }
+
+  .lang-dashboard-float-menu {
+    width: 260px;
+    max-height: 360px;
+  }
+}
+

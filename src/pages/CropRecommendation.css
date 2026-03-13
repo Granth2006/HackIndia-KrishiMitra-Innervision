@@ -1,0 +1,208 @@
+.crop-form {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.form-group label i {
+  color: var(--primary);
+  font-size: 0.82rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.7rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-row input {
+  flex: 1;
+}
+.input-row select {
+  width: 110px;
+}
+
+/* Crop Results */
+.crop-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.crop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.crop-card {
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.crop-card:hover {
+  transform: translateY(-3px);
+}
+
+.crop-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.crop-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.crop-name i {
+  color: var(--primary);
+}
+
+.crop-badge {
+  padding: 0.2rem 0.6rem;
+  background: var(--primary-alpha);
+  color: var(--primary);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.crop-card-body {
+  padding: 1rem 1.25rem;
+}
+
+.crop-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.crop-detail:last-child {
+  border-bottom: none;
+}
+
+.crop-detail i {
+  color: var(--primary);
+  font-size: 0.82rem;
+  margin-top: 0.15rem;
+  width: 16px;
+  text-align: center;
+}
+
+.crop-detail .label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  min-width: 50px;
+}
+
+.crop-detail .value {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  flex: 1;
+}
+
+.pdf-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.5rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: fit-content;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+}
+
+.pdf-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+}
+
+@media (max-width: 768px) {
+  .crop-form {
+    padding: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .input-row {
+    flex-wrap: nowrap;
+  }
+
+  .input-row select {
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .input-row input {
+    min-width: 0;
+  }
+
+  .crop-grid {
+    grid-template-columns: 1fr;
+  }
+}

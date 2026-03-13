@@ -1,0 +1,22 @@
+[
+  {
+    "id": "448094b8-b471-4610-b8e9-cfb34379df5c",
+    "endpoint": "https://wns2-pn1p.notify.windows.com/w/?token=BQYAAAA0ovGUzSalKFgPeRmsiQMob%2bvaBgXvhcDSBcjo6UinCzVhMv2nYmVc3xC0QTbZOwClhP%2bCoVZaS5YGdU9njvJXa04Q%2b%2fhkV5vEIXv6QPNzE%2bafpb%2bU5G5Sk%2buZTX%2fsNIGS6IhckqaVySgITdE%2fp%2fzdtdoK3evAWiaM2qG0muOkB4RaWJCoF2MP6Huej6RpDhT63sdG%2fphE4vy6gsZ5soA9nr16t%2bszBLVOrmjc54osOHhHMd579HlRr8pJexgsRgH4Xt46xlm%2ft6bTXgwsgGT3RYc%2bgHm%2bbG7gnprsIWiYspT0qZe2qMf2CajQUv6%2fguNLUdbJZgDvt%2frCI76PibREJogtpj6sL9cIGV%2fEaWIpqg%3d%3d",
+    "keys_p256dh": "BPzj660q96NEwL0hC3h16yq_mA1uNZzKVBXCDL5FL8aY8TuBbP_Mq0gPBzD3NiGgs1bLAsP3CqmqDf89_cYHdik",
+    "keys_auth": "mZ5XsLH5TnT0Akx4eO-jyw",
+    "user_id": "b9be9e94-78b7-4baf-b8ac-64761992ecfd",
+    "user_email": "granthkumar2006@gmail.com",
+    "created_at": "2026-03-13T10:28:43.796091+00:00",
+    "updated_at": "2026-03-13T10:34:37.417+00:00"
+  },
+  {
+    "id": "fd37d03f-cde0-4c35-aaf6-b5d1722b82dc",
+    "endpoint": "https://fcm.googleapis.com/fcm/send/fKR9R78FpaA:APA91bEPAQgnX2Xv-pkIWcHhkTMoNk8dB3HVj-yHPbbqgQV7wUwi2QGUcyvWPPb1Y6gRgFinVTxVDNXA25J6Ayjp1HV3JyWoBEv2dTHCQvrbDknMvbRPHbymxjGCI-2on8GoqRcR9xAY",
+    "keys_p256dh": "BHwuc9L6nEJyk8RHRbj7KacC8pYpXOtj56jlaiD3oBgUcANMoSU1kDB6xfUCjegxsjjOXVUgPVVTY586yXP6z0c",
+    "keys_auth": "0-Qd2IMGDm8R5yVt-1-H3g",
+    "user_id": "b9be9e94-78b7-4baf-b8ac-64761992ecfd",
+    "user_email": "granthkumar2006@gmail.com",
+    "created_at": "2026-03-13T10:35:25.285468+00:00",
+    "updated_at": "2026-03-13T10:35:24.671+00:00"
+  }
+]

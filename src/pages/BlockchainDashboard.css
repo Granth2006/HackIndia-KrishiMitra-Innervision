@@ -1,0 +1,835 @@
+/* ── Blockchain Dashboard ── */
+.blockchain-page { max-width: 1000px; }
+
+.blockchain-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 0;
+  color: var(--text-secondary, #888);
+  font-size: 16px;
+}
+.blockchain-loading i { font-size: 28px; color: var(--primary, #00a676); }
+
+/* ── Overview Cards ── */
+.bc-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.bc-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.bc-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.wallet-icon { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.token-icon { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #1a1a2e; }
+.records-icon { background: linear-gradient(135deg, #00a676, #2dd4bf); color: #fff; }
+.passport-icon { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: #fff; }
+
+.bc-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.bc-card-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary, #888);
+  font-weight: 600;
+}
+
+.bc-card-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #222);
+}
+
+.bc-address {
+  font-size: 11px;
+  font-family: monospace;
+  word-break: break-all;
+  color: var(--text-secondary, #888);
+  font-weight: 500;
+}
+
+.bc-balance { color: #ffa500; }
+
+/* ── Architecture Banner ── */
+.bc-arch-banner {
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.05));
+  border: 1px solid rgba(102,126,234,0.15);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.bc-arch-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.bc-arch-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.bc-arch-step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #667eea;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.bc-arch-step span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary, #888);
+}
+
+.bc-arch-arrow {
+  color: rgba(102,126,234,0.4);
+  font-size: 12px;
+  margin-top: -16px;
+}
+
+.bc-arch-label {
+  font-size: 12px;
+  color: var(--text-secondary, #888);
+  margin: 0;
+}
+
+/* ── Tabs ── */
+.bc-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.bc-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--border, #e8e8e8);
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary, #888);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.bc-tab:hover { border-color: var(--primary, #00a676); color: var(--primary, #00a676); }
+.bc-tab.active {
+  background: var(--primary, #00a676);
+  color: #fff;
+  border-color: var(--primary, #00a676);
+}
+
+/* ── Stats Grid ── */
+.bc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.bc-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+}
+
+.bc-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.bc-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bc-stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #222);
+}
+
+.bc-stat-label {
+  font-size: 12px;
+  color: var(--text-secondary, #888);
+}
+
+/* ── Earn Opportunities ── */
+.bc-earn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.bc-earn-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  transition: transform 0.15s;
+}
+
+.bc-earn-card:hover { transform: translateY(-2px); }
+
+.bc-earn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.bc-earn-action {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-primary, #222);
+  font-weight: 500;
+}
+
+.bc-earn-amount {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffa500;
+  white-space: nowrap;
+}
+
+/* ── Sections ── */
+.bc-section { margin-bottom: 32px; }
+
+.bc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary, #222);
+}
+.bc-section-title i { color: var(--primary, #00a676); }
+
+.bc-section-desc {
+  color: var(--text-secondary, #888);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.bc-subsection-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: var(--text-primary, #222);
+}
+
+.bc-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px;
+  color: var(--text-secondary, #888);
+  gap: 12px;
+}
+.bc-empty i { font-size: 36px; opacity: 0.4; }
+.bc-empty p { font-size: 14px; text-align: center; }
+
+/* ── Token Transaction List ── */
+.bc-tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bc-tx-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  transition: transform 0.15s;
+}
+.bc-tx-item:hover { transform: translateX(4px); }
+.bc-tx-item.bc-tx-spend { border-left: 3px solid #e74c3c; }
+
+.bc-tx-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,166,118,0.1), rgba(0,166,118,0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary, #00a676);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.bc-tx-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.bc-tx-reason { font-size: 14px; font-weight: 600; color: var(--text-primary, #222); }
+
+.bc-tx-hash {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-secondary, #888);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bc-tx-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffa500;
+  flex-shrink: 0;
+}
+
+.bc-tx-amount.bc-tx-negative { color: #e74c3c; }
+
+.bc-tx-time {
+  font-size: 11px;
+  color: var(--text-secondary, #888);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Records List ── */
+.bc-records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bc-record-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  flex-wrap: wrap;
+}
+
+.bc-record-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.bc-record-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.bc-record-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #222);
+  text-transform: capitalize;
+}
+
+.bc-record-hash,
+.bc-record-cid {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-secondary, #888);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bc-record-hash i,
+.bc-record-cid i {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.bc-record-cid {
+  color: #3b82f6;
+}
+
+.bc-record-block { font-size: 11px; color: var(--primary, #00a676); font-weight: 600; }
+
+.bc-record-actions { flex-shrink: 0; }
+
+.bc-verify-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e8e8e8);
+  background: var(--card-bg, #fff);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #888);
+  transition: all 0.2s;
+}
+.bc-verify-btn:hover { border-color: var(--primary, #00a676); color: var(--primary, #00a676); }
+.bc-verify-btn.verified {
+  background: rgba(0,166,118,0.1);
+  color: #00a676;
+  border-color: #00a676;
+}
+
+.bc-record-time {
+  font-size: 11px;
+  color: var(--text-secondary, #888);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Decrypted Data Preview ── */
+.bc-decrypted-preview {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,166,118,0.05), rgba(0,166,118,0.02));
+  border: 1px solid rgba(0,166,118,0.15);
+}
+
+.bc-decrypted-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary, #00a676);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bc-decrypted-json {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-primary, #222);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+  background: var(--card-bg, #fff);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e8e8e8);
+  margin: 0;
+}
+
+/* ── Crop Passports ── */
+.bc-passport-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bc-passport-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  flex-wrap: wrap;
+}
+
+.bc-passport-field-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bc-passport-field-info > i {
+  font-size: 20px;
+  color: var(--primary, #00a676);
+}
+
+.bc-passport-field-name { font-size: 15px; font-weight: 600; color: var(--text-primary, #222); display: block; }
+.bc-passport-field-meta { font-size: 12px; color: var(--text-secondary, #888); display: block; }
+
+.bc-passport-actions { flex-shrink: 0; }
+
+.bc-passport-action-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bc-generate-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.bc-generate-btn:hover { opacity: 0.9; }
+.bc-generate-btn:disabled { opacity: 0.6; cursor: wait; }
+
+.bc-passport-verified {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00a676;
+}
+
+.bc-passport-view-btn,
+.bc-passport-share-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #e8e8e8);
+  background: var(--card-bg, #fff);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #888);
+  transition: all 0.2s;
+}
+.bc-passport-view-btn:hover { color: #3b82f6; border-color: #3b82f6; }
+.bc-passport-share-btn:hover { color: #9b59b6; border-color: #9b59b6; }
+
+.bc-passport-history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bc-passport-record {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, #e8e8e8);
+  flex-wrap: wrap;
+}
+.bc-passport-record > i { color: #3b82f6; font-size: 18px; }
+
+.bc-passport-record-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.bc-passport-record-info span:first-child {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #222);
+}
+
+.bc-passport-record-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bc-passport-health-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.bc-passport-organic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
+}
+
+/* ── Passport Modal ── */
+.bc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1rem;
+}
+
+.bc-modal {
+  background: var(--card-bg, #fff);
+  border-radius: 20px;
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.bc-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border, #e8e8e8);
+}
+
+.bc-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary, #222);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.bc-modal-header h2 i { color: #3b82f6; }
+
+.bc-modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e8e8e8);
+  background: var(--card-bg, #fff);
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-secondary, #888);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.bc-modal-close:hover { color: #e74c3c; border-color: #e74c3c; }
+
+.bc-modal-body {
+  padding: 24px;
+}
+
+.bc-passport-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.bc-passport-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bc-passport-detail-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.bc-pd-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary, #888);
+  font-weight: 600;
+}
+
+.bc-pd-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #222);
+}
+
+.bc-pd-health { color: #e74c3c; }
+.bc-pd-organic { color: #27ae60; }
+.bc-pd-non-organic { color: #e74c3c; }
+
+.bc-pd-mono {
+  font-family: monospace;
+  font-size: 11px;
+  word-break: break-all;
+  color: var(--text-secondary, #888);
+  font-weight: 500;
+}
+
+.bc-modal-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.bc-passport-share-btn-lg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.bc-passport-share-btn-lg:hover { opacity: 0.9; }
+
+/* ── Share Toast ── */
+.bc-share-toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 1px solid rgba(155, 89, 182, 0.3);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10001;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.bc-share-toast i { color: #9b59b6; }
+
+/* ── Token Badge in Sidebar ── */
+.sidebar-token-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(255, 165, 0, 0.15);
+  color: #d97706;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .bc-overview-grid { grid-template-columns: repeat(2, 1fr); }
+  .bc-tx-item, .bc-record-item { flex-wrap: wrap; gap: 10px; }
+  .bc-tx-time, .bc-record-time { width: 100%; text-align: right; }
+  .bc-tabs { gap: 6px; }
+  .bc-tab { padding: 8px 12px; font-size: 13px; }
+  .bc-stats-grid { grid-template-columns: 1fr; }
+  .bc-earn-grid { grid-template-columns: 1fr; }
+  .bc-passport-detail-grid { grid-template-columns: 1fr; }
+  .bc-arch-flow { gap: 8px; }
+  .bc-arch-step-icon { width: 32px; height: 32px; font-size: 13px; }
+  .bc-arch-step span { font-size: 10px; }
+  .bc-passport-action-group { gap: 6px; }
+}
+
+@media (max-width: 480px) {
+  .bc-overview-grid { grid-template-columns: 1fr; }
+}

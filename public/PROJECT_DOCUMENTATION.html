@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>KrishiMitra AI v2 — Complete Project Documentation</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        color: #1a1d23;
+        line-height: 1.7;
+        background: #fff;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 50px;
+      }
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #00a676;
+        margin-bottom: 8px;
+        border-bottom: 3px solid #00a676;
+        padding-bottom: 12px;
+      }
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1a1d23;
+        margin: 36px 0 12px;
+        padding: 8px 0;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      h3 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin: 20px 0 8px;
+      }
+      h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #4a5568;
+        margin: 14px 0 6px;
+      }
+      p {
+        margin: 8px 0;
+        color: #2d3748;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+        background: #f0f4f8;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.85em;
+        color: #d63384;
+      }
+      pre {
+        background: #1a1d23;
+        color: #e8ecf4;
+        padding: 16px 20px;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82rem;
+        margin: 12px 0;
+        line-height: 1.5;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 0.9rem;
+      }
+      th {
+        background: #00a676;
+        color: #fff;
+        padding: 10px 14px;
+        text-align: left;
+        font-weight: 600;
+      }
+      td {
+        padding: 8px 14px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      tr:nth-child(even) {
+        background: #f7f8fa;
+      }
+      ul,
+      ol {
+        margin: 8px 0 8px 24px;
+      }
+      li {
+        margin: 4px 0;
+      }
+      .badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 2px;
+      }
+      .badge-green {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .badge-blue {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .badge-orange {
+        background: #ffedd5;
+        color: #9a3412;
+      }
+      .badge-purple {
+        background: #f3e8ff;
+        color: #7c3aed;
+      }
+      .flowchart {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 16px 0;
+        text-align: center;
+      }
+      .flow-box {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin: 4px;
+      }
+      .flow-green {
+        background: #dcfce7;
+        color: #166534;
+        border: 2px solid #86efac;
+      }
+      .flow-blue {
+        background: #dbeafe;
+        color: #1e40af;
+        border: 2px solid #93c5fd;
+      }
+      .flow-orange {
+        background: #ffedd5;
+        color: #9a3412;
+        border: 2px solid #fdba74;
+      }
+      .flow-purple {
+        background: #f3e8ff;
+        color: #7c3aed;
+        border: 2px solid #c4b5fd;
+      }
+      .flow-arrow {
+        display: inline-block;
+        font-size: 1.2rem;
+        margin: 0 6px;
+        color: #64748b;
+      }
+      .section-box {
+        background: #f0fdf4;
+        border-left: 4px solid #00a676;
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        margin: 14px 0;
+      }
+      .warn-box {
+        background: #fff7ed;
+        border-left: 4px solid #f97316;
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        margin: 14px 0;
+      }
+      .info-box {
+        background: #eff6ff;
+        border-left: 4px solid #3b82f6;
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        margin: 14px 0;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      @media print {
+        body {
+          padding: 20px 30px;
+          font-size: 11px;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        h2 {
+          font-size: 1.2rem;
+        }
+        pre {
+          font-size: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- COVER -->
+    <div style="text-align: center; padding: 60px 0 40px">
+      <div style="font-size: 3rem; font-weight: 800; color: #00a676">
+        🌾 KrishiMitra AI v2
+      </div>
+      <div style="font-size: 1.3rem; color: #4a5568; margin: 8px 0">
+        Smart Farming Platform — Complete Technical Documentation
+      </div>
+      <div style="margin-top: 20px; color: #94a3b8">
+        Version 2.0 | March 2026 | React + Vite + Vercel + Groq AI
+      </div>
+    </div>
+
+    <h1>1. Project Overview</h1>
+    <p>
+      <strong>KrishiMitra AI v2</strong> is a modernized web application
+      designed for <strong>Indian farmers</strong>. It provides AI-powered
+      agricultural tools including automated irrigation scheduling, plant
+      disease detection, crop recommendations, an AI chatbot, weather forecasts,
+      and a farmer marketplace.
+    </p>
+
+    <div class="section-box">
+      <strong>Primary Feature:</strong> The
+      <strong>Automatic Sprinkler System</strong> — upload a plant image → AI
+      detects diseases → recommends watering schedule, pesticide, and farming
+      tips → downloadable report.
+    </div>
+
+    <h3>Target Users</h3>
+    <ul>
+      <li>Indian farmers (rural/semi-urban), possibly low-tech savvy</li>
+      <li>
+        Design: Very simple UI, large buttons, high contrast, earthy colors,
+        minimal text, icons-first
+      </li>
+      <li>Supports 18 Indian languages via Google Translate</li>
+    </ul>
+
+    <h2>2. Technology Stack</h2>
+    <table>
+      <tr>
+        <th>Layer</th>
+        <th>Technology</th>
+        <th>Why It's Used</th>
+      </tr>
+      <tr>
+        <td>Frontend Framework</td>
+        <td><span class="badge badge-blue">React 19</span></td>
+        <td>Component-based UI, fast rendering, huge ecosystem</td>
+      </tr>
+      <tr>
+        <td>Build Tool</td>
+        <td><span class="badge badge-purple">Vite 7</span></td>
+        <td>Instant HMR, fast builds, modern ES modules</td>
+      </tr>
+      <tr>
+        <td>Routing</td>
+        <td><span class="badge badge-blue">React Router 7</span></td>
+        <td>SPA client-side routing with nested dashboard routes</td>
+      </tr>
+      <tr>
+        <td>Animations</td>
+        <td><span class="badge badge-green">Framer Motion</span></td>
+        <td>Smooth page transitions, mount/unmount animations</td>
+      </tr>
+      <tr>
+        <td>HTTP Client</td>
+        <td><span class="badge badge-orange">Axios</span></td>
+        <td>Promise-based HTTP (used in Weather page)</td>
+      </tr>
+      <tr>
+        <td>AI (Text)</td>
+        <td>
+          <span class="badge badge-purple"
+            >Groq API — moonshotai/kimi-k2-instruct</span
+          >
+        </td>
+        <td>
+          High RPM/RPD, fast inference for chatbot &amp; crop recommendations
+        </td>
+      </tr>
+      <tr>
+        <td>AI (Vision)</td>
+        <td>
+          <span class="badge badge-purple"
+            >Groq API — meta-llama/llama-4-scout</span
+          >
+        </td>
+        <td>Image understanding for plant disease detection</td>
+      </tr>
+      <tr>
+        <td>Weather</td>
+        <td><span class="badge badge-orange">OpenWeatherMap API</span></td>
+        <td>Current conditions + 5-day forecast</td>
+      </tr>
+      <tr>
+        <td>Auth</td>
+        <td>
+          <span class="badge badge-blue">Google Identity Services (GIS)</span>
+        </td>
+        <td>One-click Google OAuth login</td>
+      </tr>
+      <tr>
+        <td>Hosting</td>
+        <td><span class="badge badge-green">Vercel</span></td>
+        <td>Free, auto-SSL, serverless functions, CDN</td>
+      </tr>
+      <tr>
+        <td>Icons</td>
+        <td><span class="badge badge-blue">Font Awesome 6</span></td>
+        <td>200+ agriculture/UI icons</td>
+      </tr>
+      <tr>
+        <td>Font</td>
+        <td><span class="badge badge-green">Poppins (Google Fonts)</span></td>
+        <td>Clean, modern, readable at all sizes</td>
+      </tr>
+      <tr>
+        <td>Translation</td>
+        <td><span class="badge badge-orange">Google Translate Widget</span></td>
+        <td>18 Indian languages without manual i18n</td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td>
+          <span class="badge badge-blue">React Context + localStorage</span>
+        </td>
+        <td>Simple, no Redux needed — persists across sessions</td>
+      </tr>
+    </table>
+
+    <h2 class="page-break">3. Architecture Overview</h2>
+
+    <div class="flowchart">
+      <div class="flow-box flow-green">User's Browser (React SPA)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">Vercel CDN (Static Files)</div>
+      <br /><br />
+      <div class="flow-box flow-green">
+        React Pages (Sprinkler/Disease/Chat/Crop)
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">/api/* Serverless Functions</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-purple">Groq AI API</div>
+      <br /><br />
+      <div class="flow-box flow-green">Weather Page</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">OpenWeatherMap API (direct)</div>
+      <br /><br />
+      <div class="flow-box flow-green">Login Modal</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">Google OAuth (client-side)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-purple">localStorage</div>
+    </div>
+
+    <h3>Why This Architecture?</h3>
+    <ul>
+      <li>
+        <strong>API keys are safe</strong> — Groq keys live in Vercel env vars,
+        never exposed in browser
+      </li>
+      <li>
+        <strong>Serverless</strong> — No server to maintain; scales
+        automatically
+      </li>
+      <li>
+        <strong>Fast</strong> — Static files on CDN, API functions cold-start in
+        ~100ms
+      </li>
+      <li>
+        <strong>Free tier</strong> — Vercel hobby plan handles this workload
+        easily
+      </li>
+    </ul>
+
+    <h2>4. Complete File Structure</h2>
+    <pre>
+v2/
+├── index.html              # Entry HTML — loads fonts, FA, Google Sign-In SDK
+├── vite.config.js          # Vite config with /api proxy for local dev
+├── vercel.json             # Vercel: SPA rewrites + API route config
+├── package.json            # Dependencies + scripts
+├── dev-server.js           # Local Express server mirroring Vercel functions
+├── app.py                  # Legacy Flask backend (not used in production)
+├── .env                    # Local env vars (GROQ_API_KEY_1, WEATHER_API_KEY)
+├── .vercelignore           # Excludes .env, app.py from deployment
+│
+├── api/                    # ⚡ VERCEL SERVERLESS FUNCTIONS
+│   ├── analyze-plant.js    # POST /api/analyze-plant — Vision AI (Sprinkler/Disease)
+│   ├── chat.js             # POST /api/chat — AI Chatbot
+│   └── crop-recommend.js   # POST /api/crop-recommend — Crop Recommendations
+│
+├── public/
+│   ├── manifest.json       # PWA manifest
+│   └── krishimitra.png     # App icon/favicon
+│
+└── src/
+    ├── main.jsx            # React entry — mounts App to #root
+    ├── App.jsx             # Root: Router + Providers + Google Translate loader
+    ├── index.css           # Global design system (CSS variables, themes)
+    │
+    ├── context/
+    │   ├── AuthContext.jsx  # Auth state: login, logout, guest, localStorage
+    │   └── ThemeContext.jsx # Dark/light theme toggle, persisted
+    │
+    ├── hooks/
+    │   └── useToast.jsx    # Toast notification hook (add/remove toasts)
+    │
+    ├── components/
+    │   ├── Sidebar.jsx     # Desktop sidebar nav (260px fixed)
+    │   ├── Sidebar.css
+    │   ├── MobileNav.jsx   # Bottom tab bar (≤1024px)
+    │   ├── MobileNav.css
+    │   ├── Toast.jsx       # Animated toast notifications
+    │   ├── Toast.css
+    │   ├── ImageUploader.jsx  # Drag-drop + camera image upload
+    │   ├── ImageUploader.css
+    │   ├── LoginModal.jsx  # Google OAuth + Guest login modal
+    │   └── LoginModal.css
+    │
+    ├── pages/
+    │   ├── Landing.jsx     # Public landing page (hero, features, FAQ, CTA)
+    │   ├── Landing.css
+    │   ├── Sprinkler.jsx   # ⭐ PRIMARY: Auto Sprinkler (image → analysis)
+    │   ├── Sprinkler.css
+    │   ├── Disease.jsx     # Disease detection (image → diagnosis)
+    │   ├── Chatbot.jsx     # AI farming chatbot (text + image + voice)
+    │   ├── Chatbot.css
+    │   ├── CropRecommendation.jsx  # Crop suggestions (location-based)
+    │   ├── CropRecommendation.css
+    │   ├── Weather.jsx     # Live weather + 5-day forecast
+    │   ├── Weather.css
+    │   ├── Marketplace.jsx # Buy/sell farm products
+    │   ├── Marketplace.css
+    │   ├── Profile.jsx     # User profile + IoT toggle
+    │   └── Profile.css
+    │
+    └── assets/
+        └── krishimitra.png # Logo image
+</pre
+    >
+
+    <h2 class="page-break">5. Detailed Feature Breakdown</h2>
+
+    <h3>5.1 Authentication System</h3>
+    <p>
+      <strong>File:</strong> <code>AuthContext.jsx</code>,
+      <code>LoginModal.jsx</code>
+    </p>
+
+    <div class="flowchart">
+      <div class="flow-box flow-green">User clicks "Get Started"</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">LoginModal opens</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">Google renderButton / Guest btn</div>
+      <br /><br />
+      <div class="flow-box flow-orange">Google JWT decoded (atob)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-purple">
+        {name, email, picture} → localStorage
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-green">Navigate to /dashboard</div>
+    </div>
+
+    <h4>How Google Sign-In Works:</h4>
+    <ol>
+      <li>
+        <code>index.html</code> loads the GIS SDK:
+        <code>accounts.google.com/gsi/client</code>
+      </li>
+      <li>
+        When LoginModal mounts, <code>useEffect</code> calls
+        <code>google.accounts.id.initialize()</code> with the client ID
+      </li>
+      <li>
+        <code>google.accounts.id.renderButton()</code> renders Google's official
+        sign-in button in a ref container
+      </li>
+      <li>
+        User clicks → Google popup opens → user selects account → JWT credential
+        returned
+      </li>
+      <li>
+        JWT is decoded client-side:
+        <code>JSON.parse(atob(credential.split('.')[1]))</code>
+      </li>
+      <li>User data stored in <code>localStorage('krishimitra_user')</code></li>
+    </ol>
+
+    <h4>Guest Mode:</h4>
+    <p>
+      Stores <code>{name: 'Guest', email: 'guest@krishimitra.ai'}</code> in
+      localStorage. Same flow, just no Google interaction.
+    </p>
+
+    <div class="warn-box">
+      <strong>⚠️ Important:</strong> For Google Sign-In to work on your Vercel
+      domain, you must add it to
+      <strong>Authorized JavaScript Origins</strong> in Google Cloud Console →
+      APIs & Services → Credentials → OAuth 2.0 Client.
+    </div>
+
+    <h3>5.2 Automatic Sprinkler System (Primary Feature)</h3>
+    <p>
+      <strong>Files:</strong> <code>Sprinkler.jsx</code> →
+      <code>api/analyze-plant.js</code>
+    </p>
+
+    <div class="flowchart">
+      <div class="flow-box flow-green">User uploads plant image</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">FileReader → base64</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">
+        POST /api/analyze-plant {mode:"sprinkler", imageBase64, mimeType}
+      </div>
+      <br /><br />
+      <div class="flow-box flow-orange">Serverless function</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-purple">
+        Groq API (llama-4-scout vision model)
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-green">JSON response parsed</div>
+      <br /><br />
+      <div class="flow-box flow-green">
+        Result cards rendered: Disease | Irrigation | Pesticide | Tips
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">Download Report (TXT)</div>
+    </div>
+
+    <h4>AI Response Format (Sprinkler):</h4>
+    <pre>
+{
+  "diseaseName": "Powdery Mildew",
+  "severity": "Medium",
+  "confidence": "87%",
+  "irrigationPlan": {
+    "frequency": "Every 3 days",
+    "quantity": "2 liters per plant",
+    "bestTime": "Early morning (6-8 AM)",
+    "method": "Drip irrigation"
+  },
+  "pesticide": {
+    "type": "Sulfur-based fungicide",
+    "amount": "2ml per liter of water",
+    "applicationMethod": "Foliar spray",
+    "frequency": "Every 7 days",
+    "safetyPeriod": "14 days before harvest"
+  },
+  "soilSuggestions": "Add organic compost to improve drainage",
+  "additionalTips": ["Prune affected leaves", "Increase air circulation"]
+}</pre
+    >
+
+    <h3>5.3 Disease Detection</h3>
+    <p>
+      <strong>Files:</strong> <code>Disease.jsx</code> →
+      <code>api/analyze-plant.js</code> (same endpoint,
+      <code>mode: "disease"</code>)
+    </p>
+    <p>
+      Same image upload flow as Sprinkler, but the AI prompt focuses on
+      disease-only analysis: symptoms, causes, treatment, and prevention. No
+      irrigation data returned.
+    </p>
+
+    <h3>5.4 AI Chatbot</h3>
+    <p>
+      <strong>Files:</strong> <code>Chatbot.jsx</code> →
+      <code>api/chat.js</code>
+    </p>
+
+    <div class="flowchart">
+      <div class="flow-box flow-green">
+        User types message (or attaches image / uses mic)
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">
+        Build payload: {messages (last 10), userMessage, imageBase64?}
+      </div>
+      <br /><br />
+      <div class="flow-box flow-blue">POST /api/chat</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">
+        Text? → kimi-k2-instruct | Image? → llama-4-scout
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-purple">Groq API</div>
+      <br /><br />
+      <div class="flow-box flow-purple">{reply: "..."}</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-green">
+        Display + save to localStorage per user
+      </div>
+    </div>
+
+    <h4>Chatbot Features:</h4>
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Implementation</th>
+      </tr>
+      <tr>
+        <td>Text input</td>
+        <td>Standard form input with Enter to send</td>
+      </tr>
+      <tr>
+        <td>Image upload</td>
+        <td>
+          Hidden file input triggered by camera button; base64 sent to API
+        </td>
+      </tr>
+      <tr>
+        <td>Speech-to-text</td>
+        <td>
+          <code>webkitSpeechRecognition</code> API — mic button starts listening
+        </td>
+      </tr>
+      <tr>
+        <td>Text-to-speech</td>
+        <td>
+          <code>SpeechSynthesisUtterance</code> — speaker icon on AI messages
+        </td>
+      </tr>
+      <tr>
+        <td>Chat history</td>
+        <td>
+          Saved in <code>localStorage('chatHistory_{email}')</code> per user
+        </td>
+      </tr>
+      <tr>
+        <td>Context window</td>
+        <td>Last 10 messages sent as conversation context</td>
+      </tr>
+    </table>
+
+    <h3 class="page-break">5.5 Crop Recommendation</h3>
+    <p>
+      <strong>Files:</strong> <code>CropRecommendation.jsx</code> →
+      <code>api/crop-recommend.js</code>
+    </p>
+
+    <div class="flowchart">
+      <div class="flow-box flow-green">
+        User enters: Location, Farm Size, Last Crop, Crop Type
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-blue">POST /api/crop-recommend</div>
+      <br /><br />
+      <div class="flow-box flow-blue">Serverless function:</div>
+      <br />
+      <div class="flow-box flow-orange">1. Geocode city (Nominatim)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">2. Fetch weather (OpenWeatherMap)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-orange">
+        3. Lookup soil data (hardcoded by state)
+      </div>
+      <br /><br />
+      <div class="flow-box flow-orange">4. Build prompt with all data</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-purple">Groq AI (kimi-k2-instruct)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box flow-green">Parse 4 crop cards</div>
+    </div>
+
+    <h4>Soil Data System:</h4>
+    <p>
+      The API has a <strong>hardcoded mapping</strong> of Indian cities → states
+      → soil properties (pH, nitrogen, phosphorus, potassium, texture). This
+      avoids needing a soil database API. 40+ cities are mapped.
+    </p>
+
+    <h3>5.6 Weather Forecast</h3>
+    <p>
+      <strong>File:</strong> <code>Weather.jsx</code> (client-side only, no
+      serverless function)
+    </p>
+    <ul>
+      <li>
+        Uses browser <code>navigator.geolocation</code> on mount to auto-detect
+        location
+      </li>
+      <li>Reverse geocode via Nominatim API to get city name</li>
+      <li>Fetches current weather + 5-day forecast from OpenWeatherMap</li>
+      <li>
+        Displays: temperature, humidity, wind, rain, pressure, feels-like,
+        visibility
+      </li>
+      <li>City search: user can type any city and fetch its weather</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>Note:</strong> The Weather API key (<code>WEATHER_API_KEY</code>)
+      is used client-side in Weather.jsx and server-side in crop-recommend.js.
+      For production, consider proxying weather calls through a serverless
+      function too.
+    </div>
+
+    <h3>5.7 Marketplace</h3>
+    <p>
+      <strong>File:</strong> <code>Marketplace.jsx</code> (fully client-side,
+      localStorage-based)
+    </p>
+    <ul>
+      <li>
+        Two tabs: <strong>Buy</strong> (browse products) and
+        <strong>Sell</strong> (list your products)
+      </li>
+      <li>
+        Products stored in <code>localStorage('marketplace_products')</code>
+      </li>
+      <li>
+        Seller contact modal shows phone/email when "Contact Seller" clicked
+      </li>
+      <li>
+        Each product has: name, price (₹), quantity, category, seller info
+      </li>
+    </ul>
+
+    <h3>5.8 User Profile</h3>
+    <p><strong>File:</strong> <code>Profile.jsx</code></p>
+    <ul>
+      <li>Shows user avatar, name, email from auth context</li>
+      <li>Editable fields: name, phone, location, farm size</li>
+      <li>IoT device toggle (visual only — future hardware integration)</li>
+      <li>Logout clears localStorage and redirects to landing</li>
+    </ul>
+
+    <h2 class="page-break">6. Serverless API Routes (Vercel Functions)</h2>
+    <p>
+      All 3 files in <code>/api/</code> are auto-deployed as Vercel serverless
+      functions. Each exports a <code>handler(req, res)</code>.
+    </p>
+
+    <table>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Model</th>
+        <th>Input</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><code>/api/analyze-plant</code></td>
+        <td>POST</td>
+        <td>llama-4-scout (vision)</td>
+        <td>{mode, imageBase64, mimeType}</td>
+        <td>JSON: disease + irrigation + pesticide</td>
+      </tr>
+      <tr>
+        <td><code>/api/chat</code></td>
+        <td>POST</td>
+        <td>kimi-k2 (text) / llama-4-scout (image)</td>
+        <td>{messages, userMessage, imageBase64?}</td>
+        <td>{reply: "..."}</td>
+      </tr>
+      <tr>
+        <td><code>/api/crop-recommend</code></td>
+        <td>POST</td>
+        <td>kimi-k2 (text only)</td>
+        <td>{location, farm_size, farm_size_unit, last_crop, crop_type}</td>
+        <td>{crops: [...]}</td>
+      </tr>
+    </table>
+
+    <h3>Why Two AI Models?</h3>
+    <div class="section-box">
+      <strong>moonshotai/kimi-k2-instruct</strong> — Text-only model with very
+      high RPM (requests per minute) and RPD (requests per day). Used for
+      chatbot text and crop recommendations where no image is involved.<br /><br />
+      <strong>meta-llama/llama-4-scout-17b-16e-instruct</strong> —
+      Vision-capable model that accepts <code>image_url</code> content type.
+      Used whenever an image needs to be analyzed (Sprinkler, Disease, Chatbot
+      with image). kimi-k2 does NOT support image inputs — sending arrays to it
+      causes <code>"content must be a string"</code> error.
+    </div>
+
+    <h2>7. Routing &amp; Navigation</h2>
+    <pre>
+/                    → Landing.jsx (public)
+/dashboard           → Redirects to /dashboard/sprinkler
+/dashboard/sprinkler → Sprinkler.jsx  ⭐ (default)
+/dashboard/disease   → Disease.jsx
+/dashboard/crop      → CropRecommendation.jsx
+/dashboard/chatbot   → Chatbot.jsx
+/dashboard/weather   → Weather.jsx
+/dashboard/marketplace → Marketplace.jsx
+/dashboard/profile   → Profile.jsx
+/*                   → Redirects to /
+</pre
+    >
+
+    <h4>Protected Routes:</h4>
+    <p>
+      <code>ProtectedRoute</code> component wraps all
+      <code>/dashboard/*</code> routes. If no user in AuthContext → redirect to
+      <code>/</code>. If authenticated → render
+      <code>Sidebar + Outlet + MobileNav</code>.
+    </p>
+
+    <h2>8. Theming System</h2>
+    <p>
+      <strong>File:</strong> <code>index.css</code> (CSS variables) +
+      <code>ThemeContext.jsx</code>
+    </p>
+
+    <table>
+      <tr>
+        <th>Variable</th>
+        <th>Light</th>
+        <th>Dark</th>
+      </tr>
+      <tr>
+        <td><code>--primary</code></td>
+        <td>#00A676</td>
+        <td>#00A676</td>
+      </tr>
+      <tr>
+        <td><code>--bg</code></td>
+        <td>#f7f8fa</td>
+        <td>#0f1117</td>
+      </tr>
+      <tr>
+        <td><code>--card-bg</code></td>
+        <td>#ffffff</td>
+        <td>#1c1f2e</td>
+      </tr>
+      <tr>
+        <td><code>--text-primary</code></td>
+        <td>#1a1d23</td>
+        <td>#e8ecf4</td>
+      </tr>
+      <tr>
+        <td><code>--border</code></td>
+        <td>#e2e8f0</td>
+        <td>#2a2d3e</td>
+      </tr>
+    </table>
+
+    <p>
+      Theme is toggled by adding/removing <code>class="dark"</code> on
+      <code>&lt;body&gt;</code>. Persisted in
+      <code>localStorage('krishimitra_theme')</code>.
+    </p>
+
+    <h2 class="page-break">9. Deployment &amp; Environment</h2>
+
+    <h3>Production Deployment (Vercel)</h3>
+    <pre>npx vercel --prod --yes</pre>
+    <p>
+      This command: builds the Vite app → uploads to Vercel CDN → deploys
+      <code>/api/*.js</code> as serverless functions → aliases to production
+      URL.
+    </p>
+
+    <h4>Environment Variables (set via Vercel Dashboard or CLI):</h4>
+    <table>
+      <tr>
+        <th>Variable</th>
+        <th>Where Used</th>
+        <th>Purpose</th>
+      </tr>
+      <tr>
+        <td><code>GROQ_API_KEY_1</code></td>
+        <td>All 3 serverless functions</td>
+        <td>Authenticates with Groq API</td>
+      </tr>
+      <tr>
+        <td><code>WEATHER_API_KEY</code></td>
+        <td><code>crop-recommend.js</code></td>
+        <td>OpenWeatherMap API for crop weather data</td>
+      </tr>
+    </table>
+
+    <h3>Local Development</h3>
+    <pre>
+# Terminal 1 — API server (mirrors Vercel functions)
+npm run dev:api        # → Express on localhost:3001
+
+# Terminal 2 — Frontend
+npm run dev            # → Vite on localhost:5173 (proxies /api → :3001)
+</pre
+    >
+
+    <h4>Why not <code>vercel dev</code>?</h4>
+    <p>
+      Vercel CLI's dev mode has a known compatibility issue with Vite 7.x — it
+      fails to parse HTML files through Vite's import analysis plugin. The proxy
+      approach (Vite → Express) works identically and is the standard Vite
+      development workflow.
+    </p>
+
+    <h3>vercel.json Configuration:</h3>
+    <pre>
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}</pre
+    >
+    <p>
+      The rewrite rules: API calls pass through to serverless functions;
+      everything else serves <code>index.html</code> (SPA fallback for React
+      Router).
+    </p>
+
+    <h2>10. Security Considerations</h2>
+    <table>
+      <tr>
+        <th>Concern</th>
+        <th>How We Handle It</th>
+      </tr>
+      <tr>
+        <td>API key exposure</td>
+        <td>Groq keys are in Vercel env vars, never in frontend code</td>
+      </tr>
+      <tr>
+        <td>Google OAuth</td>
+        <td>
+          JWT token decoded client-side; credential verification via Google's
+          SDK
+        </td>
+      </tr>
+      <tr>
+        <td>CORS</td>
+        <td>
+          Serverless functions set <code>Access-Control-Allow-Origin: *</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Image uploads</td>
+        <td>Base64 encoded in browser, sent via POST body — no file storage</td>
+      </tr>
+      <tr>
+        <td>Data persistence</td>
+        <td>All user data in localStorage (client-only, no database)</td>
+      </tr>
+    </table>
+
+    <h2>11. PWA (Progressive Web App)</h2>
+    <p><strong>File:</strong> <code>public/manifest.json</code></p>
+    <p>
+      The app includes a web manifest enabling "Add to Home Screen" on mobile
+      devices. Configuration:
+    </p>
+    <ul>
+      <li><code>display: standalone</code> — runs like a native app</li>
+      <li><code>theme_color: #00A676</code> — green status bar</li>
+      <li><code>orientation: portrait</code> — mobile-first</li>
+    </ul>
+
+    <h2>12. Key Design Decisions</h2>
+    <table>
+      <tr>
+        <th>Decision</th>
+        <th>Rationale</th>
+      </tr>
+      <tr>
+        <td>localStorage over database</td>
+        <td>
+          No backend infra needed; works offline; target users may have
+          intermittent connectivity
+        </td>
+      </tr>
+      <tr>
+        <td>Serverless over Flask</td>
+        <td>
+          Zero maintenance, auto-scaling, free tier; Flask was only needed for
+          local dev
+        </td>
+      </tr>
+      <tr>
+        <td>Two AI models</td>
+        <td>
+          kimi-k2 has better RPM limits for text; llama-4-scout is needed for
+          vision — kimi-k2 cannot accept images
+        </td>
+      </tr>
+      <tr>
+        <td>Google Translate over i18n</td>
+        <td>
+          18 languages without any translation files; simpler for rapid
+          development
+        </td>
+      </tr>
+      <tr>
+        <td>CSS variables over Tailwind</td>
+        <td>
+          Full control over design system; no build-time dependency; easier dark
+          mode
+        </td>
+      </tr>
+      <tr>
+        <td>Framer Motion over CSS animations</td>
+        <td>Mount/unmount animations; spring physics; gesture support</td>
+      </tr>
+    </table>
+
+    <div
+      style="
+        text-align: center;
+        padding: 40px 0;
+        color: #94a3b8;
+        border-top: 2px solid #e2e8f0;
+        margin-top: 40px;
+      "
+    >
+      <strong>KrishiMitra AI v2</strong> — Built with ❤️ for Indian Farmers<br />
+      <em>Open this file in Chrome → Ctrl+P → Save as PDF</em>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,344 @@
+.market-actions {
+  margin-bottom: 1.25rem;
+}
+
+.sell-form {
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.sell-form h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.sell-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.sell-form input {
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.sell-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.my-listings {
+  margin-bottom: 1.5rem;
+}
+.my-listings h2,
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product-card {
+  padding: 1.25rem;
+  transition: transform 0.2s;
+}
+
+.product-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.product-card-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.price {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.product-details span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.product-details i {
+  color: var(--primary);
+  font-size: 0.8rem;
+  width: 16px;
+  text-align: center;
+}
+
+.buy-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.my-card {
+  border-color: var(--primary);
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.remove-btn {
+  background: none;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.remove-btn:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.modal-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.modal-card h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.seller-info div {
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.seller-info strong {
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .sell-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* ── Market Passport Status ── */
+.market-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.market-passport-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3b82f6;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.market-passport-status i {
+  font-size: 12px;
+}
+
+/* ── Product Passport Badge ── */
+.product-passport-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.05));
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.product-passport-badge > i {
+  color: #3b82f6;
+  font-size: 13px;
+}
+
+.product-passport-badge > span:first-of-type {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.passport-health-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.passport-health-pill i {
+  font-size: 10px;
+}
+
+.passport-organic-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
+}
+
+.passport-organic-pill i {
+  font-size: 10px;
+}
+
+/* ── Modal Passport Section ── */
+.modal-passport-section {
+  margin-bottom: 1rem;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(6, 182, 212, 0.03));
+  border: 1px solid rgba(59, 130, 246, 0.12);
+}
+
+.modal-passport-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.modal-passport-badge > i {
+  color: #3b82f6;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.modal-passport-badge strong {
+  font-size: 13px;
+  color: #3b82f6;
+  display: block;
+}
+
+.modal-passport-badge p {
+  font-size: 11px;
+  color: var(--text-secondary, #888);
+  margin: 2px 0 0 0;
+}
+
+.modal-passport-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.modal-passport-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-primary, #222);
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+}
+
+.modal-passport-stat i {
+  color: #e74c3c;
+  font-size: 12px;
+}
+
+.modal-passport-stat.organic i {
+  color: #27ae60;
+}
