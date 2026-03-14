@@ -1583,3 +1583,7 @@
     align-items: center;
   }
 }
+
+.demo-section{
+  display: none !important;
+}

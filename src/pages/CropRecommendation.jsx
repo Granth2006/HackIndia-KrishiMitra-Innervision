@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import {
   logService,
@@ -12,7 +12,7 @@ import { applyPlugin } from "jspdf-autotable";
 applyPlugin(jsPDF);
 import "./CropRecommendation.css";
 
-function generateCropPDF(crops, form) {
+function generateCropPDF(crops, form, source) {
   const date = new Date().toLocaleDateString("en-IN", {
     year: "numeric",
     month: "long",
@@ -48,7 +48,8 @@ function generateCropPDF(crops, form) {
   });
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
-  doc.text("AI-Powered Smart Farming Platform", pageWidth / 2, 24, {
+  const sourceLabel = source === "ml" ? "ML Model Powered" : "AI-Powered Smart Farming Platform";
+  doc.text(sourceLabel, pageWidth / 2, 24, {
     align: "center",
   });
 
@@ -159,6 +160,9 @@ export default function CropRecommendation() {
   const [crops, setCrops] = useState([]);
   const [error, setError] = useState("");
   const [guestBlocked, setGuestBlocked] = useState(false);
+  const [mode, setMode] = useState("ml"); // "ml" or "ai"
+  const [mlMeta, setMlMeta] = useState(null); // ML model metadata
+  const [responseSource, setResponseSource] = useState(null); // track which source responded
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -182,26 +186,45 @@ export default function CropRecommendation() {
     setLoading(true);
     setError("");
     setCrops([]);
+    setMlMeta(null);
+    setResponseSource(null);
+
     try {
-      const res = await fetch("/api/crop-recommend", {
+      const endpoint = mode === "ml" ? "/api/crop-recommend-ml" : "/api/crop-recommend";
+
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+
       if (!res.ok) {
         const d = await res.json();
         throw new Error(d.error || "Analysis failed");
       }
+
       const data = await res.json();
       setCrops(data.crops || []);
+      setResponseSource(mode);
+
+      // Store ML model metadata if available
+      if (data.model_info) {
+        setMlMeta({
+          ...data.model_info,
+          state: data.state_used,
+          category: data.category_used,
+          band: data.temp_band,
+          weather: data.weather,
+        });
+      }
 
       // Log to Supabase
       const userId = user?.dbId || null;
       if (userId) {
-        logService(userId, "crop_recommendation", form, data.crops);
+        logService(userId, "crop_recommendation", { ...form, mode }, data.crops);
         // Blockchain: record on-chain + award tokens
         if (blockchain) {
-          blockchain.addRecord("crop_recommendation", { form, crops: data.crops });
+          blockchain.addRecord("crop_recommendation", { form, crops: data.crops, mode });
           blockchain.awardTokens(5, "crop_recommendation");
         }
       } else if (user?.isGuest) {
@@ -228,6 +251,48 @@ export default function CropRecommendation() {
         <p className="page-desc">
           Get AI-powered crop suggestions based on your location, soil, and
           weather conditions
+        </p>
+      </motion.div>
+
+      {/* Mode Toggle */}
+      <motion.div
+        className="mode-toggle-container"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.05 }}
+      >
+        <div className="mode-toggle">
+          <button
+            className={`mode-btn ${mode === "ml" ? "active" : ""}`}
+            onClick={() => setMode("ml")}
+            type="button"
+          >
+            <i className="fas fa-brain"></i>
+            <span>ML Model</span>
+            <span className="mode-badge">Fast & Accurate</span>
+          </button>
+          <button
+            className={`mode-btn ${mode === "ai" ? "active" : ""}`}
+            onClick={() => setMode("ai")}
+            type="button"
+          >
+            <i className="fas fa-robot"></i>
+            <span>AI (Groq)</span>
+            <span className="mode-badge">LLM Powered</span>
+          </button>
+        </div>
+        <p className="mode-desc">
+          {mode === "ml" ? (
+            <>
+              <i className="fas fa-info-circle"></i>
+              Uses a trained Machine Learning model (RandomForest/XGBoost) for precise crop predictions based on soil & weather data. No API key needed.
+            </>
+          ) : (
+            <>
+              <i className="fas fa-info-circle"></i>
+              Uses Groq LLM API for natural language crop recommendations. Requires API key but provides detailed reasoning.
+            </>
+          )}
         </p>
       </motion.div>
 
@@ -314,11 +379,13 @@ export default function CropRecommendation() {
         >
           {loading ? (
             <>
-              <i className="fas fa-spinner fa-spin"></i> Analyzing...
+              <i className="fas fa-spinner fa-spin"></i> 
+              {mode === "ml" ? "Running ML Model..." : "Analyzing..."}
             </>
           ) : (
             <>
-              <i className="fas fa-search"></i> Get Recommendations
+              <i className={mode === "ml" ? "fas fa-microchip" : "fas fa-search"}></i> 
+              {mode === "ml" ? "Get ML Predictions" : "Get Recommendations"}
             </>
           )}
         </button>
@@ -328,6 +395,45 @@ export default function CropRecommendation() {
           </div>
         )}
       </motion.form>
+
+      {/* ML Model Info Badge */}
+      <AnimatePresence>
+        {mlMeta && responseSource === "ml" && (
+          <motion.div
+            className="ml-meta-badge"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+          >
+            <div className="ml-meta-header">
+              <i className="fas fa-microchip"></i>
+              <span>ML Model Results</span>
+            </div>
+            <div className="ml-meta-details">
+              <div className="ml-meta-item">
+                <span className="ml-meta-label">Model</span>
+                <span className="ml-meta-value">{mlMeta.model_name}</span>
+              </div>
+              <div className="ml-meta-item">
+                <span className="ml-meta-label">Accuracy</span>
+                <span className="ml-meta-value">{(mlMeta.accuracy * 100).toFixed(1)}%</span>
+              </div>
+              <div className="ml-meta-item">
+                <span className="ml-meta-label">State</span>
+                <span className="ml-meta-value" style={{textTransform: 'capitalize'}}>{mlMeta.state}</span>
+              </div>
+              {mlMeta.weather && (
+                <div className="ml-meta-item">
+                  <span className="ml-meta-label">Weather</span>
+                  <span className="ml-meta-value">
+                    {mlMeta.weather.temp}°C, {mlMeta.weather.humidity}% humidity
+                  </span>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {crops.length > 0 && (
         <motion.div
@@ -366,7 +472,9 @@ export default function CropRecommendation() {
                   </div>
                   <div className="crop-detail">
                     <i className="fas fa-info-circle"></i>
-                    <span className="label">Reason:</span>
+                    <span className="label">
+                      {responseSource === "ml" ? "Season:" : "Reason:"}
+                    </span>
                     <span className="value">{crop.season}</span>
                   </div>
                   <div className="crop-detail">
@@ -374,13 +482,27 @@ export default function CropRecommendation() {
                     <span className="label">Water:</span>
                     <span className="value">{crop.waterRequirement}</span>
                   </div>
+                  {responseSource === "ml" && crop.confidence != null && (
+                    <div className="crop-detail crop-confidence">
+                      <i className="fas fa-bullseye"></i>
+                      <span className="label">ML Confidence:</span>
+                      <span className="value confidence-value">
+                        {(crop.confidence * 100).toFixed(1)}%
+                      </span>
+                    </div>
+                  )}
                 </div>
+                {responseSource === "ml" && (
+                  <div className="crop-card-ml-badge">
+                    <i className="fas fa-microchip"></i> ML Predicted
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
           <button
             className="pdf-btn"
-            onClick={() => generateCropPDF(crops, form)}
+            onClick={() => generateCropPDF(crops, form, responseSource)}
           >
             <i className="fas fa-file-pdf"></i> Download PDF Report
           </button>

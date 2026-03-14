@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌾 Smart Sprinkler — AI Crop Advisor</title>
+    <meta name="description"
+        content="AI-powered crop recommendation system for Indian farmers. Just enter your location and get ML predictions with AI insights.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f0d;
+            --bg-secondary: #111916;
+            --bg-card: rgba(20, 32, 26, 0.7);
+            --bg-input: rgba(16, 26, 20, 0.9);
+            --bg-glass: rgba(30, 50, 40, 0.35);
+            --border: rgba(52, 211, 153, 0.12);
+            --border-focus: rgba(52, 211, 153, 0.5);
+            --text-primary: #e8f5e9;
+            --text-secondary: #8fac98;
+            --text-muted: #5a7a65;
+            --accent: #34d399;
+            --accent-dim: rgba(52, 211, 153, 0.15);
+            --accent-glow: rgba(52, 211, 153, 0.25);
+            --gold: #fbbf24;
+            --orange: #fb923c;
+            --red: #f87171;
+            --blue: #60a5fa;
+            --radius: 14px;
+            --radius-sm: 8px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -40%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(52, 211, 153, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -30%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(ellipse, rgba(251, 191, 36, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 36px 20px 16px;
+        }
+
+        .header__icon {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 6px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        .header__title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), #a7f3d0, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .header__subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .header__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header__badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.5
+            }
+        }
+
+        /* Layout */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 960px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Panels */
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .panel__header {
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel__title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel__body {
+            padding: 16px 20px 20px;
+        }
+
+        /* Form */
+        .form-section {
+            margin-bottom: 16px;
+        }
+
+        .form-section__label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .form-grid.cols-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .field {
+            position: relative;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .field input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+
+        .field select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238fac98' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        /* Size row */
+        .size-row {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            gap: 10px;
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #059669, #34d399);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(52, 211, 153, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Presets */
+        .presets {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            padding: 5px 10px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .preset-btn:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Results */
+        .results-placeholder {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+        }
+
+        .results-placeholder__icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .results-placeholder__text {
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .crop-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px;
+            margin-bottom: 14px;
+            transition: var(--transition);
+            animation: slideUp 0.4s ease-out both;
+        }
+
+        .crop-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .crop-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .crop-card:hover {
+            border-color: var(--accent-glow);
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.08);
+        }
+
+        .crop-card__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .crop-card__name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .crop-card__rank {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .crop-card__rank.rank-1 {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a1a1a;
+        }
+
+        .crop-card__rank.rank-2 {
+            background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+            color: #1a1a1a;
+        }
+
+        .crop-card__rank.rank-3 {
+            background: linear-gradient(135deg, #b45309, #d97706);
+            color: #fff;
+        }
+
+        .confidence-bar {
+            margin-bottom: 14px;
+        }
+
+        .confidence-bar__label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .confidence-bar__track {
+            height: 5px;
+            background: rgba(52, 211, 153, 0.1);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .confidence-bar__fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--accent), #a7f3d0);
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .insight-item {
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            background: rgba(10, 20, 15, 0.5);
+            border: 1px solid rgba(52, 211, 153, 0.08);
+        }
+
+        .insight-item__icon {
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .insight-item__label {
+            font-size: 0.62rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .insight-item__value {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .insight-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .risk-low {
+            color: var(--accent);
+        }
+
+        .risk-medium {
+            color: var(--gold);
+        }
+
+        .risk-high {
+            color: var(--red);
+        }
+
+        /* Environment data bar */
+        .env-bar {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            background: rgba(96, 165, 250, 0.06);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+        }
+
+        .env-bar__title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .env-bar__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .env-bar__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .env-item__label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .env-item__value {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .model-bar {
+            margin-top: 14px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+        }
+
+        .model-bar span {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .error-msg {
+            text-align: center;
+            padding: 20px;
+            color: var(--red);
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+        }
+
+        /* Loading status message */
+        .loading-status {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .loading-status__spinner {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 14px;
+            border: 3px solid rgba(52, 211, 153, 0.15);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .loading-status__text {
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .loading-status__step {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 24px 20px 16px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <span class="header__icon">🌾</span>
+        <h1 class="header__title">Smart Sprinkler</h1>
+        <p class="header__subtitle">Just tell us where your farm is — we'll do the rest</p>
+        <div class="header__badge"><span class="dot"></span> ML + Satellite + AI</div>
+    </header>
+
+    <main class="container">
+
+        <!-- ─── INPUT ─── -->
+        <div class="panel" id="input-panel">
+            <div class="panel__header">
+                <div class="panel__title">📍 Your Farm</div>
+            </div>
+            <div class="panel__body">
+                <form id="farm-form" autocomplete="off">
+
+                    <div class="presets">
+                        <button type="button" class="preset-btn" onclick="loadPreset('karnal')">🌾 Karnal,
+                            Haryana</button>
+                        <button type="button" class="preset-btn" onclick="loadPreset('ludhiana')">🍚 Ludhiana,
+                            Punjab</button>
+                        <button type="button" class="preset-btn" onclick="loadPreset('indore')">🫛 Indore, MP</button>
+                        <button type="button" class="preset-btn" onclick="loadPreset('rajkot')">🧵 Rajkot,
+                            Gujarat</button>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section__label">📍 Location</div>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="input-city">City / Village</label>
+                                <input type="text" id="input-city" placeholder="e.g. Karnal" value="Karnal" required>
+                            </div>
+                            <div class="field">
+                                <label for="input-state">State</label>
+                                <select id="input-state" required>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana" selected>Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section__label">🌿 Crop Info</div>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="input-category">Crop Category</label>
+                                <select id="input-category" required>
+                                    <option value="grains">🌾 Grains</option>
+                                    <option value="pulses">🫛 Pulses</option>
+                                    <option value="fruits">🍎 Fruits</option>
+                                    <option value="vegetables">🥬 Vegetables</option>
+                                    <option value="commercial">🏭 Commercial</option>
+                                    <option value="oilseeds">🌻 Oilseeds</option>
+                                    <option value="other">📦 Other</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="input-prev-crop">Previous Crop</label>
+                                <input type="text" id="input-prev-crop" placeholder="e.g. wheat" value="wheat">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section__label">📐 Farm Size</div>
+                        <div class="size-row">
+                            <div class="field">
+                                <label for="input-size">Size</label>
+                                <input type="number" id="input-size" placeholder="e.g. 5" step="0.1" min="0.01"
+                                    value="5" required>
+                            </div>
+                            <div class="field">
+                                <label for="input-unit">Unit</label>
+                                <select id="input-unit">
+                                    <option value="acre">Acre</option>
+                                    <option value="bigha" selected>Bigha</option>
+                                    <option value="yard">Yard²</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submit-btn">
+                        <span id="btn-text">🌱 Get Crop Recommendations</span>
+                        <div id="btn-spinner" class="spinner" style="display:none;"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ─── RESULTS ─── -->
+        <div class="panel" id="results-panel">
+            <div class="panel__header">
+                <div class="panel__title">📊 Recommendations</div>
+            </div>
+            <div class="panel__body" id="results-body">
+                <div class="results-placeholder" id="placeholder">
+                    <div class="results-placeholder__icon">🛰️</div>
+                    <div class="results-placeholder__text">
+                        Enter your farm location and click<br>
+                        <strong>"Get Crop Recommendations"</strong><br>
+                        <small style="color:var(--text-muted)">Soil & weather data will be fetched automatically<br>from
+                            satellite and weather APIs</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        Smart Sprinkler v2.0 · ML: XGBoost · AI: Groq (Llama 3.3) · Data: Open-Meteo + SoilGrids/ISRIC
+    </footer>
+
+    <script>
+        const API_URL = 'http://localhost:8000/api/v1/recommend';
+
+        const PRESETS = {
+            karnal: { city: 'Karnal', state: 'Haryana', crop_category: 'grains', previous_crop: 'rice', farm_size: 5, farm_size_unit: 'bigha' },
+            ludhiana: { city: 'Ludhiana', state: 'Punjab', crop_category: 'grains', previous_crop: 'wheat', farm_size: 3, farm_size_unit: 'acre' },
+            indore: { city: 'Indore', state: 'Madhya Pradesh', crop_category: 'pulses', previous_crop: 'wheat', farm_size: 8, farm_size_unit: 'bigha' },
+            rajkot: { city: 'Rajkot', state: 'Gujarat', crop_category: 'commercial', previous_crop: 'groundnut', farm_size: 4, farm_size_unit: 'acre' },
+        };
+
+        function loadPreset(name) {
+            const p = PRESETS[name]; if (!p) return;
+            document.getElementById('input-city').value = p.city;
+            document.getElementById('input-state').value = p.state;
+            document.getElementById('input-category').value = p.crop_category;
+            document.getElementById('input-prev-crop').value = p.previous_crop;
+            document.getElementById('input-size').value = p.farm_size;
+            document.getElementById('input-unit').value = p.farm_size_unit;
+        }
+
+        const CROP_EMOJI = {
+            rice: '🍚', wheat: '🌾', maize: '🌽', barley: '🌾', chickpea: '🫛', lentil: '🫛',
+            pigeonpeas: '🫛', mothbeans: '🫛', mungbean: '🫛', blackgram: '🫛', kidneybeans: '🫘',
+            banana: '🍌', mango: '🥭', grapes: '🍇', watermelon: '🍉', muskmelon: '🍈',
+            apple: '🍎', orange: '🍊', papaya: '🥭', coconut: '🥥', pomegranate: '🫐',
+            cotton: '🧵', coffee: '☕', jute: '🧶', groundnut: '🥜', sunflower: '🌻',
+            potato: '🥔', tomato: '🍅', onion: '🧅',
+        };
+
+        function riskClass(level) {
+            const l = (level || '').toLowerCase();
+            if (l.includes('low')) return 'risk-low';
+            if (l.includes('high')) return 'risk-high';
+            return 'risk-medium';
+        }
+
+        function renderResults(data) {
+            const body = document.getElementById('results-body');
+            let html = '';
+
+            data.recommendations.forEach((rec, idx) => {
+                const pct = (rec.confidence * 100).toFixed(1);
+                const emoji = CROP_EMOJI[rec.crop] || '🌿';
+                const ai = rec.ai_insights;
+
+                html += `
+        <div class="crop-card">
+            <div class="crop-card__header">
+                <div class="crop-card__name">${emoji} ${rec.crop}</div>
+                <div class="crop-card__rank rank-${idx + 1}">#${idx + 1}</div>
+            </div>
+            <div class="confidence-bar">
+                <div class="confidence-bar__label"><span>Confidence</span><span>${pct}%</span></div>
+                <div class="confidence-bar__track"><div class="confidence-bar__fill" style="width:${pct}%"></div></div>
+            </div>
+            <div class="insights-grid">
+                <div class="insight-item"><div class="insight-item__icon">📦</div><div class="insight-item__label">Yield / Hectare</div><div class="insight-item__value">${ai.yield_prediction}</div></div>
+                <div class="insight-item"><div class="insight-item__icon">💰</div><div class="insight-item__label">Est. Profit</div><div class="insight-item__value">${ai.estimated_profit}</div></div>
+                <div class="insight-item"><div class="insight-item__icon">⚠️</div><div class="insight-item__label">Risk Level</div><div class="insight-item__value ${riskClass(ai.risk_level)}">${ai.risk_level}</div></div>
+                <div class="insight-item"><div class="insight-item__icon">📈</div><div class="insight-item__label">Market Demand</div><div class="insight-item__value">${ai.market_demand}</div></div>
+                <div class="insight-item full"><div class="insight-item__icon">🧪</div><div class="insight-item__label">Fertilizer Recommendation</div><div class="insight-item__value">${ai.fertilizer_recommendation}</div></div>
+            </div>
+        </div>`;
+            });
+
+            // Environment data
+            if (data.environment_data) {
+                const e = data.environment_data;
+                html += `
+        <div class="env-bar">
+            <div class="env-bar__title">🛰️ Auto-Detected Environment Data</div>
+            <div class="env-bar__grid">
+                <div class="env-item"><div class="env-item__label">Temperature</div><div class="env-item__value">${e.temperature}°C</div></div>
+                <div class="env-item"><div class="env-item__label">Humidity</div><div class="env-item__value">${e.humidity}%</div></div>
+                <div class="env-item"><div class="env-item__label">Rainfall</div><div class="env-item__value">${e.rainfall} mm</div></div>
+                <div class="env-item"><div class="env-item__label">Soil pH</div><div class="env-item__value">${e.ph}</div></div>
+                <div class="env-item"><div class="env-item__label">Nitrogen</div><div class="env-item__value">${e.N} kg/ha</div></div>
+                <div class="env-item"><div class="env-item__label">Phosphorus</div><div class="env-item__value">${e.P} kg/ha</div></div>
+                <div class="env-item"><div class="env-item__label">Potassium</div><div class="env-item__value">${e.K} kg/ha</div></div>
+                <div class="env-item"><div class="env-item__label">Farm Size</div><div class="env-item__value">${data.farm_size_acres} acres</div></div>
+            </div>
+        </div>`;
+            }
+
+            if (data.model_info) {
+                html += `
+        <div class="model-bar">
+            <div>Model: <span>${data.model_info.model_name}</span></div>
+            <div>Accuracy: <span>${(data.model_info.accuracy * 100).toFixed(1)}%</span></div>
+        </div>`;
+            }
+
+            body.innerHTML = html;
+        }
+
+        function showLoading(step) {
+            document.getElementById('results-body').innerHTML = `
+        <div class="loading-status">
+            <div class="loading-status__spinner"></div>
+            <div class="loading-status__text">Analyzing your farm...</div>
+            <div class="loading-status__step">${step}</div>
+        </div>`;
+        }
+
+        document.getElementById('farm-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const spinner = document.getElementById('btn-spinner');
+
+            btn.disabled = true;
+            btnText.textContent = 'Analyzing...';
+            spinner.style.display = 'block';
+            showLoading('📍 Geocoding location & fetching satellite data...');
+
+            const payload = {
+                city: document.getElementById('input-city').value,
+                state: document.getElementById('input-state').value,
+                crop_category: document.getElementById('input-category').value,
+                previous_crop: document.getElementById('input-prev-crop').value || 'unknown',
+                farm_size: parseFloat(document.getElementById('input-size').value) || 1,
+                farm_size_unit: document.getElementById('input-unit').value,
+            };
+
+            try {
+                // Update loading status after a delay
+                setTimeout(() => showLoading('🌦️ Fetching weather & soil data...'), 2000);
+                setTimeout(() => showLoading('🤖 Running ML model & AI analysis...'), 4000);
+
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}));
+                    throw new Error(err.detail || `HTTP ${res.status}`);
+                }
+
+                const data = await res.json();
+                renderResults(data);
+
+            } catch (err) {
+                document.getElementById('results-body').innerHTML = `
+            <div class="error-msg">
+                ❌ <strong>Error:</strong> ${err.message}<br>
+                <small style="opacity:0.7">Make sure the API server is running</small>
+            </div>`;
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = '🌱 Get Crop Recommendations';
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

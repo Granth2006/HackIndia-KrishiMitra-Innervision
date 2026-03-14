@@ -265,6 +265,130 @@ app.post("/api/crop-recommend", async (req, res) => {
   }
 });
 
+// ============ /api/crop-recommend-ml ============
+import { readFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename_dev = fileURLToPath(import.meta.url);
+const __dirname_dev = dirname(__filename_dev);
+
+let ML_DATA_CACHE = null;
+function loadMLDataDev() {
+  if (ML_DATA_CACHE) return ML_DATA_CACHE;
+  try {
+    const filePath = join(__dirname_dev, "api", "ml-crop-data.json");
+    const raw = readFileSync(filePath, "utf-8");
+    ML_DATA_CACHE = JSON.parse(raw);
+    return ML_DATA_CACHE;
+  } catch (err) {
+    console.error("Failed to load ML data:", err.message);
+    return null;
+  }
+}
+
+const ML_CITY_TO_STATE = {
+  mumbai: "maharashtra", delhi: "delhi", bangalore: "karnataka", bengaluru: "karnataka",
+  hyderabad: "telangana", ahmedabad: "gujarat", chennai: "tamil nadu",
+  kolkata: "west bengal", pune: "maharashtra", jaipur: "rajasthan",
+  lucknow: "uttar pradesh", kanpur: "uttar pradesh", nagpur: "maharashtra",
+  indore: "madhya pradesh", bhopal: "madhya pradesh", patna: "bihar",
+  vadodara: "gujarat", ludhiana: "punjab", agra: "uttar pradesh",
+  faridabad: "haryana", varanasi: "uttar pradesh", amritsar: "punjab",
+  ranchi: "jharkhand", coimbatore: "tamil nadu", raipur: "chhattisgarh",
+  guwahati: "assam", chandigarh: "chandigarh", mysore: "karnataka",
+  gurgaon: "haryana", gurugram: "haryana", bhubaneswar: "odisha",
+  thiruvananthapuram: "kerala", kochi: "kerala", mangalore: "karnataka",
+  noida: "uttar pradesh", "new delhi": "delhi", surat: "gujarat",
+  nashik: "maharashtra", jodhpur: "rajasthan", kota: "rajasthan",
+  dehradun: "uttarakhand", shimla: "himachal pradesh",
+  karnal: "haryana", rohtak: "haryana", panipat: "haryana",
+};
+
+function resolveStateDev(city) {
+  const lower = city.toLowerCase().trim();
+  if (ML_CITY_TO_STATE[lower]) return ML_CITY_TO_STATE[lower];
+  const mlData = loadMLDataDev();
+  if (mlData?.soil_data) {
+    for (const state of Object.keys(mlData.soil_data)) {
+      if (lower.includes(state) || state.includes(lower)) return state;
+    }
+  }
+  for (const [ck, sv] of Object.entries(ML_CITY_TO_STATE)) {
+    if (lower.includes(ck) || ck.includes(lower)) return sv;
+  }
+  return null;
+}
+
+function getTempBandDev(temp) {
+  const bands = [
+    { label: "cold", temp: 15 }, { label: "cool_dry", temp: 18 },
+    { label: "mild", temp: 22 }, { label: "warm", temp: 28 },
+    { label: "hot_humid", temp: 32 }, { label: "hot", temp: 35 },
+  ];
+  let closest = bands[0], minDiff = Math.abs(temp - bands[0].temp);
+  for (const b of bands) { const d = Math.abs(temp - b.temp); if (d < minDiff) { minDiff = d; closest = b; } }
+  return closest.label;
+}
+
+function mapCropTypeDev(ct) {
+  const m = { vegetables: "vegetables", fruits: "fruits", grains: "grains", pulses: "pulses", spices: "commercial", flowers: "other", oilseeds: "oilseeds", commercial: "commercial" };
+  return m[(ct || "vegetables").toLowerCase()] || "other";
+}
+
+const BAND_TEMPS_DEV = { cold: 15, cool_dry: 18, mild: 22, warm: 28, hot_humid: 32, hot: 35 };
+
+app.post("/api/crop-recommend-ml", async (req, res) => {
+  try {
+    const { location, farm_size, farm_size_unit = "acre", last_crop = "None", crop_type = "Vegetables" } = req.body;
+    if (!location || !farm_size) return res.status(400).json({ error: "Missing location or farm_size" });
+
+    const mlData = loadMLDataDev();
+    if (!mlData) return res.status(500).json({ error: "ML model data not available" });
+
+    let state = resolveStateDev(location);
+    let weatherData = null;
+
+    try {
+      const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=5&language=en&format=json`);
+      const geoData = await geoRes.json();
+      const results = geoData.results || [];
+      const indiaResults = results.filter(r => (r.country_code || "").toUpperCase() === "IN");
+      const match = indiaResults.length ? indiaResults[0] : results[0];
+      if (match) {
+        const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${match.latitude}&longitude=${match.longitude}&current=temperature_2m,relative_humidity_2m,rain&timezone=Asia/Kolkata`);
+        const wData = await wRes.json();
+        const current = wData.current || {};
+        weatherData = { temp: Math.round((current.temperature_2m || 28) * 10) / 10, humidity: current.relative_humidity_2m || 65, rainfall: 100 };
+      }
+    } catch { /* ignore */ }
+
+    if (!weatherData) weatherData = { temp: 28, humidity: 65, rainfall: 100 };
+    if (!state) state = "uttar pradesh";
+
+    const category = mapCropTypeDev(crop_type);
+    const band = getTempBandDev(weatherData.temp);
+
+    const statePredictions = mlData.predictions[state];
+    if (!statePredictions) return res.status(400).json({ error: `No ML data for state: ${state}` });
+    const categoryPredictions = statePredictions[category];
+    if (!categoryPredictions) return res.status(400).json({ error: `No ML data for category: ${category}` });
+
+    let crops = categoryPredictions[band] || categoryPredictions["warm"] || categoryPredictions["mild"] || [];
+    if (!crops.length) return res.status(400).json({ error: "No ML predictions" });
+
+    const bandTemp = BAND_TEMPS_DEV[band] || 28;
+    crops = crops.map(crop => ({
+      ...crop,
+      suitability: Math.max(40, crop.suitability - Math.min(15, Math.round(Math.abs(weatherData.temp - bandTemp) * 1.5))),
+    }));
+
+    res.json({ crops, source: "ml_model", model_info: mlData.model_info, weather: weatherData, state_used: state, category_used: category, temp_band: band });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ============ Supabase setup for DB routes ============
 import { createClient } from "@supabase/supabase-js";
 import crypto from "crypto";
