@@ -84,7 +84,7 @@ Follow these steps to set up the project locally on your machine.
 <summary><b>1. Clone the repository</b></summary>
 
 ```bash
-git clone https://github.com/yourusername/krishimitra.git
+git clone https://github.com/Granth2006/KrishiMitra-Innervision.git
 cd "krishimitra main"
 ```
 </details>
@@ -103,9 +103,22 @@ npm install
 Create a `.env` file in the root directory and add the necessary variables:
 
 ```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-# Also include keys for API endpoints used internally
+WEATHER_API_KEY= your weather api key
+
+GROQ_API_KEY_1= your groq api key
+
+# Supabase
+VITE_SUPABASE_URL=  your vite supabase url  
+VITE_SUPABASE_ANON_KEY= your vite supabase anon key
+
+# Admin Dashboard
+ADMIN_USERNAME= your username
+ADMIN_PASSWORD= your password
+
+# VAPID Keys for Push Notifications
+VAPID_PUBLIC_KEY= your vapid public key
+VAPID_PRIVATE_KEY= your vapid private key
+VITE_VAPID_PUBLIC_KEY= your vite vapid public key
 ```
 </details>
 
@@ -144,17 +157,8 @@ krishimitra main/
 └── vite.config.js        # Vite builder configuration
 ```
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! <br />
-Feel free to check out the [issues page](https://github.com/yourusername/krishimitra/issues).
-
-## 🛡️ License
-
-This project is licensed under the [MIT License](LICENSE).
-
 <hr />
 
 <div align="center">
-  <p>Made with ❤️ to revolutionize agriculture</p>
+  <p>Made with ❤️ to revolutionize agriculture by Granth, Yash, and Shreeya</p>
 </div>
